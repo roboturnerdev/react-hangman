@@ -28,6 +28,7 @@ class Hangman extends Component {
     return this.state.answer
       .split("")
       .map(ltr => (this.state.guessed.has(ltr) ? ltr : "_"));
+      // Set.has returns a bool if ltr is included, if not put a _
   }
 
   /** handleGuest: handle a guessed letter:
@@ -46,6 +47,7 @@ class Hangman extends Component {
   generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
       <button
+        key={ltr}
         value={ltr}
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(ltr)}

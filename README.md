@@ -16,6 +16,6 @@ Game only starts with 6 guesses by default, so it should only allow 6 wrong gues
 
 * Alt Text. Add alts to the image that explains the gamestate for accessibility.
 
-* Random Word. By default the word is always apply. Data provided in words.js list of words and a function returning a random word. Incorporate this so the game uses this to choose a secret word.
+* Random Word. By default the word is always apple. Data provided in words.js list of words and a function returning a random word. Incorporate this so the game uses this to choose a secret word.
 
 * Add Restart button. Button that restarts the game. Should pick a new random word and reset list of guessed letters and number of wrong guesses.
