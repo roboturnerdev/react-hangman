@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { randomWord } from './words';
 import "./Hangman.css";
 import img0 from "./0.jpg";
 import img1 from "./1.jpg";
@@ -17,7 +18,7 @@ class Hangman extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { nWrong: 0, guessed: new Set(), answer: "apple" };
+    this.state = { nWrong: 0, guessed: new Set(), answer: randomWord() };
     this.handleGuess = this.handleGuess.bind(this);
   }
 
@@ -28,7 +29,6 @@ class Hangman extends Component {
     return this.state.answer
       .split("")
       .map(ltr => (this.state.guessed.has(ltr) ? ltr : "_"));
-      // Set.has returns a bool if ltr is included, if not put a _
   }
 
   /** handleGuest: handle a guessed letter:
@@ -59,15 +59,18 @@ class Hangman extends Component {
 
   /** render: render game */
   render() {
+    const gameOver = this.state.nWrong >= this.props.maxWrong;
+    const altText = `${this.state.nWrong}/${this.props.maxWrong} Guesses Used`;
     return (
       <div className='Hangman'>
         <h1>Hangman</h1>
-        <img src={this.props.images[this.state.nWrong]} />
+        <img src={this.props.images[this.state.nWrong]} 
+          alt={altText} />
         <p>Wrong Guesses: {this.state.nWrong}</p>
-        <p className='Hangman-word'>{this.guessedWord()}</p>
+        <p className='Hangman-word'>{!gameOver? this.guessedWord() : this.state.answer}</p>
         <p className='Hangman-btns'>
-          {this.state.nWrong < this.props.maxWrong ? this.generateButtons() : 
-          `Lost, the answer was : ${this.state.answer}`}
+          {gameOver? `You have lost The Game : )` : 
+            this.generateButtons()}
           </p>
       </div>
     );
