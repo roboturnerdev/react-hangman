@@ -20,6 +20,16 @@ class Hangman extends Component {
     super(props);
     this.state = { nWrong: 0, guessed: new Set(), answer: randomWord() };
     this.handleGuess = this.handleGuess.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    // same logic as initializing the state, but we don't assign state outside constructor, only mutate.
+    this.setState({ 
+      nWrong: 0, 
+      guessed: new Set(), 
+      answer: randomWord() 
+    });
   }
 
   /** guessedWord: show current-state of word:
@@ -60,7 +70,11 @@ class Hangman extends Component {
   /** render: render game */
   render() {
     const gameOver = this.state.nWrong >= this.props.maxWrong;
+    const isWinner = this.guessedWord().join("") === this.state.answer;
     const altText = `${this.state.nWrong}/${this.props.maxWrong} Guesses Used`;
+    let gameState = this.generateButtons();
+    if(isWinner) gameState = 'Winner Winner Steak Dinner!';
+    if(gameOver) gameState = 'You have lost The Game';
     return (
       <div className='Hangman'>
         <h1>Hangman</h1>
@@ -69,9 +83,9 @@ class Hangman extends Component {
         <p>Wrong Guesses: {this.state.nWrong}</p>
         <p className='Hangman-word'>{!gameOver? this.guessedWord() : this.state.answer}</p>
         <p className='Hangman-btns'>
-          {gameOver? `You have lost The Game : )` : 
-            this.generateButtons()}
-          </p>
+          {gameState}
+        </p>
+        <button id='reset' onClick={this.reset}>Restart</button>
       </div>
     );
   }

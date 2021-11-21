@@ -4,6 +4,25 @@ This app will serve to practice more game logic, as well as implement the princi
 
 Colt provided starter code for this example and I will be modifying that solution.
 
+## Complete: Takeaways
+
+### Lots of Game Logic
+
+* Multiple phases of creating this simple hangman game. First had simple logic showing buttons and whether or not you've lost. Eventually changed it up to create isWinner and gameOver to determine 'gameState' separate from 'this.state'.
+
+* Would refactor gameState into its own method if I did any more than what's in the solution.
+
+### Use of Set, Array.split, Array.join, Array.map
+
+* These array functions are critical to React so far. Getting good practice in with Sets or mapping over arrays and performing callbacks on the items is a common pattern.
+
+<img src="https://i.imgur.com/aOO4fyT.png">
+<img src="https://i.imgur.com/jcrpBwf.png">
+<img src="https://i.imgur.com/yD5D3Pi.png">
+<img src="https://i.imgur.com/9J99xXK.png">
+
+# Original Post
+
 ## Requirements
 
 * Add keys. Buttons current do not have unique key prop.
